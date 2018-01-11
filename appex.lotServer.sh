@@ -3,14 +3,6 @@
 function Welcome()
 {
 clear
-echo -n "                      Local Time :   " && date "+%F [%T]       ";
-echo "            ======================================================";
-echo "            |                    serverSpeeder                   |";
-echo "            |                                         for Linux  |";
-echo "            |----------------------------------------------------|";
-echo "            |                                       -- By .Vicer |";
-echo "            ======================================================";
-echo "";
 rootness;
 cd /root
 }
@@ -50,7 +42,7 @@ Eth=$(ifconfig |grep -B1 "$(wget -qO- ipv4.icanhazip.com)" |awk -F '[: ]' '/eth/
 [ -z "$Eth" ] && echo -ne "It is seem that you server not as usually. \nPlease input your public Ethernet: " && read tmpEth;
 tmpEth=$(echo "$tmpEth"|sed 's/[ \t]*//g') && [ -n "$tmpEth" ] && [ -z $(echo "$tmpEth" |grep -E -i "venet") ] && [[ -n $(ifconfig |grep -E "$tmpEth") ]] && Eth="$tmpEth";
 [ -z "$Eth" ] && echo "I can not find the server pubilc Ethernet! " && exit 1
-URLKernel='https://raw.githubusercontent.com/0oVicero0/serverSpeeder_kernel/master/serverSpeeder.txt'
+URLKernel='https://raw.githubusercontent.com/jacols/serverSpeederKernel/master/serverSpeeder.txt'
 MyKernel=$(curl -k -q --progress-bar "$URLKernel" |grep "$KNA/" |grep "/x$KNB/" |grep "/$KNK/" |sort -k3 -t '_' |tail -n 1)
 [ -z "$MyKernel" ] && echo -ne "Kernel not be matched! \nYou should change kernel manually, and try again! \n\nView the link to get detaits: \n"$URLKernel" \n\n\n" && exit 1
 pause;
@@ -60,7 +52,7 @@ function SelectKernel()
 {
 KNN=$(echo $MyKernel |awk -F '/' '{ print $2 }') && [ -z "$KNN" ] && Unstall && echo "Error,Not Matched! " && exit 1
 KNV=$(echo $MyKernel |awk -F '/' '{ print $5 }') && [ -z "$KNV" ] && Unstall && echo "Error,Not Matched! " && exit 1
-wget --no-check-certificate -q -O "/root/appex/apxfiles/bin/acce-"$KNV"-["$KNA"_"$KNN"_"$KNK"]" "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_kernel/master/$MyKernel"
+wget --no-check-certificate -q -O "/root/appex/apxfiles/bin/acce-"$KNV"-["$KNA"_"$KNN"_"$KNK"]" "https://raw.githubusercontent.com/jacols/serverSpeederKernel/master/$MyKernel"
 [ ! -f "/root/appex/apxfiles/bin/acce-"$KNV"-["$KNA"_"$KNN"_"$KNK"]" ] && Unstall && echo "Download Error,Not Found acce-$KNV-[$KNA_$KNN_$KNK]! " && exit 1
 }
 
@@ -123,7 +115,7 @@ chattr +i /appex/etc/apx.lic
 
 function ServerSpeeder()
 {
-[ ! -f /root/appex.zip ] && wget --no-check-certificate -q -O "/root/appex.zip" "https://raw.githubusercontent.com/0oVicero0/serverSpeeser_Install/master/appex.zip"
+[ ! -f /root/appex.zip ] && wget --no-check-certificate -q -O "/root/appex.zip" "https://raw.githubusercontent.com/jacols/serverSpeeserInstall/master/appex.zip"
 [ ! -f /root/appex.zip ] && Unstall && echo "Error,Not Found appex.zip! " && exit 1
 mkdir -p /root/appex
 unzip -o -d /root/appex /root/appex.zip
